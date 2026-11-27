@@ -84,7 +84,8 @@ Deno.serve(async (req) => {
 
   const { data: dests, error: dErr } = await db
     .from('destinations').select('*').ilike('city', `%${input.city}%`).eq('is_active', true);
-  if (dErr || !dests?.length) return json({ error: 'no_destinations' }, 400);
+  if (dErr) return json({ error: 'db_error', detail: dErr.message }, 500);
+  if (!dests?.length) return json({ error: 'no_destinations' }, 400);
 
   const catalog = dests.map((d) => ({
     id: d.id, name: d.name, category: d.category_id, interests: d.interests,
@@ -110,12 +111,12 @@ Deno.serve(async (req) => {
 
   let plan: z.infer<typeof AiPlan>;
   try {
-    const raw = await callGemini(apiKey, Deno.env.get('GEMINI_MODEL') ?? 'gemini-2.0-flash', system, user);
+    const raw = await callGemini(apiKey, Deno.env.get('GEMINI_MODEL') ?? 'gemini-2.5-flash', system, user);
     const candidate = AiPlan.safeParse(JSON.parse(raw));
     if (!candidate.success) throw new Error('ai_schema_invalid');
     plan = candidate.data;
-  } catch (_e) {
-    return json({ error: 'ai_unavailable' }, 502); // frontend builds labeled fallback
+  } catch (e) {
+    return json({ error: 'ai_unavailable', reason: e instanceof Error ? e.message : String(e) }, 502); // frontend builds labeled fallback
   }
 
   // Server-side truth: costs & schedule from DB, never from the model.
