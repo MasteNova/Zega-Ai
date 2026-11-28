@@ -48,14 +48,22 @@ export interface ItineraryInput {
 export interface ItineraryStop {
   destinationId: string; name: string; lat: number; lng: number;
   arrive: string; depart: string; minutes: number; activity: string; description?: string;
-  entryMin: number; entryMax: number; transportMin: number; transportMax: number; isVerified: boolean;
+  entryMin: number; entryMax: number; transportMin: number; transportMax: number;
+  foodMin?: number; foodMax?: number; otherMin?: number; otherMax?: number;
+  isVerified: boolean;
 }
 
 export interface ItineraryPayload {
   title: string; city: string; source: 'ai' | 'fallback';
   budgetEtb: number; startTime: string; groupSize: number;
   stops: ItineraryStop[];
-  totals: { entryMin: number; entryMax: number; transportMin: number; transportMax: number; totalMin: number; totalMax: number };
+  totals: {
+    entryMin: number; entryMax: number;
+    transportMin: number; transportMax: number;
+    foodMin?: number; foodMax?: number;
+    otherMin?: number; otherMax?: number;
+    totalMin: number; totalMax: number;
+  };
   remainingMin: number; remainingMax: number;
   tips: string[]; safety: string[]; alternatives: { id: string; name: string }[]; warnings: string[];
 }

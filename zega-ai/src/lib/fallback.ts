@@ -31,7 +31,9 @@ export function buildFallbackItinerary(dests: Destination[], input: ItineraryInp
       arrive, depart: toHHMM(cursor), minutes,
       activity: d.description?.slice(0, 140) ?? `Visit ${d.name}.`,
       description: d.description ?? undefined,
-      entryMin, entryMax, transportMin: 0, transportMax: 0, isVerified: d.is_verified
+      entryMin, entryMax, transportMin: 0, transportMax: 0,
+      foodMin: 0, foodMax: 0, otherMin: 0, otherMax: 0,
+      isVerified: d.is_verified
     });
     elapsed += travel + minutes;
     spentMax += entryMax;

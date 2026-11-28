@@ -17,7 +17,10 @@ const stopSchema = z.object({
   arrive: z.string(), depart: z.string(), minutes: z.number(), activity: z.string(),
   description: z.string().optional(),
   entryMin: z.number().min(0), entryMax: z.number().min(0),
-  transportMin: z.number().min(0), transportMax: z.number().min(0), isVerified: z.boolean()
+  transportMin: z.number().min(0), transportMax: z.number().min(0),
+  foodMin: z.number().min(0).default(0), foodMax: z.number().min(0).default(0),
+  otherMin: z.number().min(0).default(0), otherMax: z.number().min(0).default(0),
+  isVerified: z.boolean()
 });
 
 export const itineraryPayloadSchema = z.object({
@@ -25,8 +28,11 @@ export const itineraryPayloadSchema = z.object({
   budgetEtb: z.number(), startTime: z.string(), groupSize: z.number(),
   stops: z.array(stopSchema).min(1),
   totals: z.object({
-    entryMin: z.number(), entryMax: z.number(), transportMin: z.number(),
-    transportMax: z.number(), totalMin: z.number(), totalMax: z.number()
+    entryMin: z.number(), entryMax: z.number(),
+    transportMin: z.number(), transportMax: z.number(),
+    foodMin: z.number().default(0), foodMax: z.number().default(0),
+    otherMin: z.number().default(0), otherMax: z.number().default(0),
+    totalMin: z.number(), totalMax: z.number()
   }),
   remainingMin: z.number(), remainingMax: z.number(),
   tips: z.array(z.string()), safety: z.array(z.string()),

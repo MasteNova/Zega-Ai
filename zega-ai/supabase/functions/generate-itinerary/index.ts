@@ -30,7 +30,11 @@ const AiPlan = z.object({
     minutes: z.number().int().min(5).max(480),
     activity: z.string().max(300),
     transport_cost_min: z.number().min(0).max(100_000).default(0),
-    transport_cost_max: z.number().min(0).max(100_000).default(0)
+    transport_cost_max: z.number().min(0).max(100_000).default(0),
+    food_cost_min: z.number().min(0).max(100_000).default(0),
+    food_cost_max: z.number().min(0).max(100_000).default(0),
+    other_cost_min: z.number().min(0).max(100_000).default(0),
+    other_cost_max: z.number().min(0).max(100_000).default(0)
   })).min(1).max(8),
   tips: z.array(z.string().max(300)).max(6).default([]),
   safety: z.array(z.string().max(300)).max(6).default([]),
@@ -112,10 +116,11 @@ Deno.serve(async (req) => {
     `Plan ${targetStops} geographically logical stops (use lat/lng so stops flow smoothly from ${input.startLocation})`,
     `that fit ${input.hours} hours (including ~15-20 min travel between stops) and stay within ${input.budgetEtb} ETB total.`,
     `Match interests (${input.interests.join(', ') || 'any'}) and ${input.travelStyle} pace using ${input.transport}.`,
-    'Write concise, practical activity instructions (what to see/do) and realistic ETB transport_cost_min/max per leg.',
+    'Write concise, practical activity instructions (what to see/do) and realistic ETB estimates per stop for:',
+    'transport_cost_min/max (bajaj/taxi/boat), food_cost_min/max (snacks/meals/water/coffee), and other_cost_min/max (local guide/scout/tips).',
     'Respond ONLY with JSON:',
     '{"title":string,"stops":[{"destination_id":uuid,"minutes":int,"activity":string,',
-    '"transport_cost_min":number,"transport_cost_max":number}],"tips":string[],"safety":string[],"alternatives":uuid[]}'
+    '"transport_cost_min":number,"transport_cost_max":number,"food_cost_min":number,"food_cost_max":number,"other_cost_min":number,"other_cost_max":number}],"tips":string[],"safety":string[],"alternatives":uuid[]}'
   ].join(' ');
 
   const user = JSON.stringify({ request: input, catalog });
@@ -165,14 +170,19 @@ Deno.serve(async (req) => {
       description: (d.description ?? '') as string,
       entryMin: Number(d.entry_fee_min ?? 0), entryMax: Number(d.entry_fee_max ?? d.entry_fee_min ?? 0),
       transportMin: Math.min(s.transport_cost_min, s.transport_cost_max),
-      transportMax: s.transport_cost_max, isVerified: Boolean(d.is_verified),
+      transportMax: Math.max(s.transport_cost_min, s.transport_cost_max),
+      foodMin: Math.min(s.food_cost_min, s.food_cost_max),
+      foodMax: Math.max(s.food_cost_min, s.food_cost_max),
+      otherMin: Math.min(s.other_cost_min, s.other_cost_max),
+      otherMax: Math.max(s.other_cost_min, s.other_cost_max),
+      isVerified: Boolean(d.is_verified),
       arrive: '', depart: ''
     };
   });
   if (!stops.length) return json({ error: 'ai_unavailable', reason: 'no_valid_stops' }, 502);
 
   const warnings: string[] = [];
-  const totalMax = () => stops.reduce((a, s) => a + s.entryMax + s.transportMax, 0);
+  const totalMax = () => stops.reduce((a, s) => a + s.entryMax + s.transportMax + s.foodMax + s.otherMax, 0);
   while (stops.length > 1 && totalMax() > input.budgetEtb) {
     stops.pop();
     warnings.push('A stop was removed to keep the plan within your budget.');
@@ -186,12 +196,15 @@ Deno.serve(async (req) => {
     return true;
   });
 
-  const sum = (k: 'entryMin' | 'entryMax' | 'transportMin' | 'transportMax') =>
+  const sum = (k: 'entryMin' | 'entryMax' | 'transportMin' | 'transportMax' | 'foodMin' | 'foodMax' | 'otherMin' | 'otherMax') =>
     stops.reduce((a, s) => a + s[k], 0);
   const totals = {
     entryMin: sum('entryMin'), entryMax: sum('entryMax'),
     transportMin: sum('transportMin'), transportMax: sum('transportMax'),
-    totalMin: sum('entryMin') + sum('transportMin'), totalMax: sum('entryMax') + sum('transportMax')
+    foodMin: sum('foodMin'), foodMax: sum('foodMax'),
+    otherMin: sum('otherMin'), otherMax: sum('otherMax'),
+    totalMin: sum('entryMin') + sum('transportMin') + sum('foodMin') + sum('otherMin'),
+    totalMax: sum('entryMax') + sum('transportMax') + sum('foodMax') + sum('otherMax')
   };
   if (stops.some((s) => !s.isVerified))
     warnings.push('Some places/prices are unverified demo data — confirm locally before paying.');

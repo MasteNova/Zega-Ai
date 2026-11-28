@@ -42,7 +42,7 @@ export default function DestinationDetail() {
 
       <DestinationMap destinations={[d]} height="40vh" showLocate={false} />
       <div className="flex flex-wrap gap-3">
-        <a href={mapsLink(d.lat, d.lng)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-forest underline">
+        <a href={mapsLink(d.lat, d.lng, d.name, d.city)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-medium text-forest underline">
           <ExternalLink size={15} /> {t('openMap')}
         </a>
         <Link to="/planner" className="text-sm font-medium text-terra-700 underline">Add to a plan → {t('planner')}</Link>
