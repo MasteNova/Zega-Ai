@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Arba Minch — Forty Springs, Twin Lakes & Nechisar Tours</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="keywords" content="Arba Minch, Ethiopia, Nechisar National Park, Lake Chamo, Lake Abaya, Forty Springs, Dorze Village, Crocodile Market">
+    <meta name="description" content="Explore Arba Minch, Ethiopia — the Land of Forty Springs, Bridge of God, Lake Chamo Crocodile Market, Nechisar National Park, and Dorze Highlands.">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Topbar Start -->
+    <div class="topbar d-none d-lg-block">
+        <div class="container-fluid px-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="d-inline-flex align-items-center gap-3 small text-white">
+                        <span><i class="fa-solid fa-location-dot me-1"></i> Arba Minch, Gamo Zone, Ethiopia</span>
+                        <span><i class="fa-solid fa-phone me-1"></i> +251 46 881 0040</span>
+                        <span><i class="fa-solid fa-envelope me-1"></i> visit@arbaminch-tours.et</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-end">
+                    <div class="d-inline-flex align-items-center gap-2">
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#contact" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#contact" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#contact" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#contact" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0" id="home">
+        <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-custom px-4 px-lg-5 py-2 py-lg-0">
+            <a href="#home" class="navbar-brand p-0 d-flex align-items-center">
+                <h1 class="m-0"><i class="fa-solid fa-water me-2 text-warning"></i>Arba Minch</h1>
+            </a>
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-label="Toggle navigation">
+                <span class="fa-solid fa-bars fs-4"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="#home" class="nav-item nav-link active">Home</a>
+                    <a href="#about" class="nav-item nav-link">About</a>
+                    <a href="#services" class="nav-item nav-link">Services</a>
+                    <a href="#destinations" class="nav-item nav-link">Destinations</a>
+                    <a href="#packages" class="nav-item nav-link">Packages</a>
+                    <a href="#guides" class="nav-item nav-link">Guides</a>
+                    <a href="#contact" class="nav-item nav-link">Contact</a>
+                </div>
+                <a href="#booking" class="btn btn-accent rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+            </div>
+        </nav>
+
+        <!-- Hero Carousel Start -->
+        <div class="carousel-header">
+            <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <img src="img/hero-nechisar.jpg" alt="Bridge of God separating Lake Abaya and Lake Chamo in Arba Minch">
+                        <div class="carousel-caption">
+                            <div class="container" style="max-width: 880px;">
+                                <h5 class="text-warning text-uppercase fw-bold mb-3" style="letter-spacing: 3px;">Explore Southern Ethiopia</h5>
+                                <h1 class="display-2 text-white mb-4">The Bridge of God &amp; Twin Lakes</h1>
+                                <p class="fs-5 text-white-50 mb-4 px-md-5">
+                                    Witness where terracotta Lake Abaya meets sapphire Lake Chamo across the lush forested ridge of Ye'egzer Dildiy in the Great Rift Valley.
+                                </p>
+                                <div class="d-flex flex-wrap justify-content-center gap-3">
+                                    <a href="#packages" class="btn btn-accent rounded-pill py-3 px-5">Explore Tours</a>
+                                    <a href="#destinations" class="btn btn-outline-light rounded-pill py-3 px-5">Top Sights</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <img src="img/hero-forty-springs.jpg" alt="Forty Springs Forest in Arba Minch">
+                        <div class="carousel-caption">
+                            <div class="container" style="max-width: 880px;">
+                                <h5 class="text-warning text-uppercase fw-bold mb-3" style="letter-spacing: 3px;">Land of Forty Springs</h5>
+                                <h1 class="display-2 text-white mb-4">Crystal Springs &amp; Ancient Fig Forests</h1>
+                                <p class="fs-5 text-white-50 mb-4 px-md-5">
+                                    Walk beneath towering sycamore canopies where forty natural mineral springs bubble straight from the Rift Valley floor.
+                                </p>
+                                <div class="d-flex flex-wrap justify-content-center gap-3">
+                                    <a href="#booking" class="btn btn-accent rounded-pill py-3 px-5">Plan Your Visit</a>
+                                    <a href="#about" class="btn btn-outline-light rounded-pill py-3 px-5">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-item">
+                        <img src="img/dest-chamo-crocodiles.jpg" alt="Lake Chamo Crocodile Market Boat Safari">
+                        <div class="carousel-caption">
+                            <div class="container" style="max-width: 880px;">
+                                <h5 class="text-warning text-uppercase fw-bold mb-3" style="letter-spacing: 3px;">Wild Rift Valley Adventure</h5>
+                                <h1 class="display-2 text-white mb-4">Lake Chamo &amp; Nechisar Safari</h1>
+                                <p class="fs-5 text-white-50 mb-4 px-md-5">
+                                    Glide past giant Nile crocodiles at the Crocodile Market and spot Burchell's zebras roaming the golden Nechisar savanna.
+                                </p>
+                                <div class="d-flex flex-wrap justify-content-center gap-3">
+                                    <a href="#packages" class="btn btn-accent rounded-pill py-3 px-5">View Packages</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <!-- Hero Carousel End -->
+    </div>
+    <!-- Navbar & Hero End -->
+
+    <!-- Quick Search Bar Start -->
+    <div class="container search-bar-wrapper">
+        <div class="search-bar-card">
+            <form id="tripSearchForm" class="row g-2 align-items-center">
+                <div class="col-lg-5">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-0 rounded-start-pill ps-3"><i class="fa-solid fa-magnifying-glass text-primary"></i></span>
+                        <input id="tripSearchInput" type="text" class="form-control border-0 rounded-end-pill py-2" placeholder="Search Lake Chamo, Dorze, Forty Springs...">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <select class="form-select border-0 rounded-pill py-2" aria-label="Experience type">
+                        <option selected>All Experiences</option>
+                        <option>Boat Safari</option>
+                        <option>Wildlife Drive</option>
+                        <option>Cultural Highland Tour</option>
+                        <option>Nature &amp; Birding</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <select class="form-select border-0 rounded-pill py-2" aria-label="Duration">
+                        <option selected>1–3 Days</option>
+                        <option>Half Day</option>
+                        <option>Full Day</option>
+                        <option>3+ Days</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 d-grid">
+                    <button type="submit" class="btn btn-accent rounded-pill py-2 fw-bold">Find Trip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Quick Search Bar End -->
+
+    <!-- About Section Start -->
+    <section id="about" class="py-5 my-4">
+        <div class="container py-4">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-img-frame">
+                        <img src="img/about-arba-minch.jpg" alt="Ethiopian coffee ceremony and tropical fruits overlooking Arba Minch twin lakes">
+                        <div class="about-badge">
+                            <div class="fs-4 fw-bold">40+ Springs</div>
+                            <small class="text-white-50">Heart of the Gamo Highlands &amp; Twin Lakes</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h6 class="section-title mb-3">About Arba Minch</h6>
+                    <h2 class="display-6 fw-bold mb-4">Welcome to <span class="text-primary">Arba Minch</span> — Ethiopia's Tropical Rift Oasis</h2>
+                    <p class="text-muted mb-3">
+                        Named after the Amharic words for <strong>"Forty Springs"</strong>, Arba Minch sits nestled between the Guge Mountains and two contrasting Rift Valley lakes: the iron-rich reddish waters of <strong>Lake Abaya</strong> and the deep blue expanse of <strong>Lake Chamo</strong>.
+                    </p>
+                    <p class="text-muted mb-4">
+                        Whether you are cruising past giant Nile crocodiles, trekking with zebras in Nechisar National Park, or sharing freshly baked <em>kotcho</em> and handwoven cotton stories with the Dorze people, Arba Minch blends wild nature with warm southern Ethiopian hospitality.
+                    </p>
+                    <div class="row gy-2 gx-4 mb-4">
+                        <div class="col-sm-6">
+                            <p class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Nechisar National Park Safaris</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Lake Chamo Crocodile Market</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Dorze Bamboo Village Tours</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Forty Springs Forest Walks</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Fresh Mango &amp; Banana Orchards</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Certified Local Gamo Guides</p>
+                        </div>
+                    </div>
+                    <a href="#destinations" class="btn btn-primary rounded-pill py-3 px-5">Discover Highlights</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- Services Section Start -->
+    <section id="services" class="bg-light py-5">
+        <div class="container py-4">
+            <div class="text-center mx-auto mb-5" style="max-width: 680px;">
+                <h6 class="section-title mb-3">Our Services</h6>
+                <h2 class="display-6 fw-bold">Curated Arba Minch Experiences</h2>
+                <p class="text-muted">Everything you need for an unforgettable stay in southern Ethiopia — from boat captains to highland cultural hosts.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item d-flex gap-3">
+                        <div class="service-icon"><i class="fa-solid fa-ship"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Lake Chamo Boat Safaris</h5>
+                            <p class="text-muted mb-0">Private and small-group motorboat excursions to the famous Crocodile Market, hippo pods, and pelican islands.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item d-flex gap-3">
+                        <div class="service-icon"><i class="fa-solid fa-binoculars"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Nechisar 4x4 Game Drives</h5>
+                            <p class="text-muted mb-0">Guided morning and sunset drives across the White Grass plains to spot zebras, Swayne's hartebeest, and greater kudu.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item d-flex gap-3">
+                        <div class="service-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Dorze Highland Tours</h5>
+                            <p class="text-muted mb-0">Ascend to 2,900m in the Guge Mountains to tour woven bamboo huts, traditional looms, and enset cooking.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item d-flex gap-3">
+                        <div class="service-icon"><i class="fa-solid fa-tree"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Forty Springs Nature Walks</h5>
+                            <p class="text-muted mb-0">Spot black-and-white colobus monkeys, hornbills, and lush groundwater forest trails right beside town.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item d-flex gap-3">
+                        <div class="service-icon"><i class="fa-solid fa-hotel"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Rift-View Lodge Stays</h5>
+                            <p class="text-muted mb-0">Handpicked stays overlooking the Bridge of God, with sunset terraces, local coffee ceremonies, and fresh fruit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item d-flex gap-3">
+                        <div class="service-icon"><i class="fa-solid fa-route"></i></div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Omo Valley &amp; Airport Transfers</h5>
+                            <p class="text-muted mb-0">Seamless pickups from Arba Minch Airport (AMH) and custom onward journeys to Konso, Jinka, and Turmi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+    <!-- Destinations Section Start -->
+    <section id="destinations" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mx-auto mb-4" style="max-width: 680px;">
+                <h6 class="section-title mb-3">Destinations</h6>
+                <h2 class="display-6 fw-bold">Must-See Places Around Arba Minch</h2>
+            </div>
+
+            <!-- Filter Pills -->
+            <ul class="nav nav-pills justify-content-center mb-5">
+                <li class="nav-item">
+                    <button class="nav-link active" data-filter="all">All Sights</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-filter="lakes">Lakes &amp; Springs</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-filter="wildlife">Wildlife</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-filter="culture">Culture</button>
+                </li>
+            </ul>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 dest-item" data-category="lakes">
+                    <div class="destination-card">
+                        <img src="img/hero-nechisar.jpg" alt="Bridge of God Ye'egzer Dildiy">
+                        <span class="destination-tag">Lakes &amp; Springs</span>
+                        <div class="destination-overlay">
+                            <h4 class="fw-bold mb-1">Bridge of God (Ye'egzer Dildiy)</h4>
+                            <p class="small text-white-50 mb-0">Natural forested isthmus dividing reddish Lake Abaya and blue Lake Chamo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 dest-item" data-category="wildlife">
+                    <div class="destination-card">
+                        <img src="img/dest-chamo-crocodiles.jpg" alt="Lake Chamo Crocodile Market">
+                        <span class="destination-tag">Wildlife</span>
+                        <div class="destination-overlay">
+                            <h4 class="fw-bold mb-1">Lake Chamo Crocodile Market</h4>
+                            <p class="small text-white-50 mb-0">Home to Africa's largest Nile crocodiles, basking hippos, and waterbirds.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 dest-item" data-category="lakes">
+                    <div class="destination-card">
+                        <img src="img/hero-forty-springs.jpg" alt="Forty Springs Arba Minch">
+                        <span class="destination-tag">Lakes &amp; Springs</span>
+                        <div class="destination-overlay">
+                            <h4 class="fw-bold mb-1">Forty Springs Forest</h4>
+                            <p class="small text-white-50 mb-0">Emerald natural springs bubbling under giant sycamore trees inside Nechisar Park.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 dest-item" data-category="wildlife">
+                    <div class="destination-card">
+                        <img src="img/dest-nechisar-savanna.jpg" alt="Nechisar Savanna Plains">
+                        <span class="destination-tag">Wildlife</span>
+                        <div class="destination-overlay">
+                            <h4 class="fw-bold mb-1">Nechisar Savanna Plains</h4>
+                            <p class="small text-white-50 mb-0">Golden grasslands teeming with Burchell's zebras, gazelles, and endemic birds.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 dest-item" data-category="culture">
+                    <div class="destination-card">
+                        <img src="img/dest-dorze-village.jpg" alt="Dorze Village Chencha">
+                        <span class="destination-tag">Culture</span>
+                        <div class="destination-overlay">
+                            <h4 class="fw-bold mb-1">Dorze Village &amp; Chencha</h4>
+                            <p class="small text-white-50 mb-0">Iconic towering woven bamboo houses, master weavers, and cool mountain air.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 dest-item" data-category="culture">
+                    <div class="destination-card">
+                        <img src="img/about-arba-minch.jpg" alt="Arba Minch Coffee and Fruit Terraces">
+                        <span class="destination-tag">Culture</span>
+                        <div class="destination-overlay">
+                            <h4 class="fw-bold mb-1">Twin Lakes Sunset Terraces</h4>
+                            <p class="small text-white-50 mb-0">Freshly roasted Ethiopian buna, tropical mangoes, and panoramic Rift Valley views.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Destinations Section End -->
+
+    <!-- Tour Packages Start -->
+    <section id="packages" class="bg-light py-5">
+        <div class="container py-4">
+            <div class="text-center mx-auto mb-5" style="max-width: 680px;">
+                <h6 class="section-title mb-3">Tour Packages</h6>
+                <h2 class="display-6 fw-bold">Popular Arba Minch Itineraries</h2>
+                <p class="text-muted">Flexible, locally guided packages designed around flight schedules from Addis Ababa and Omo Valley routes.</p>
+            </div>
+            <div class="row g-4">
+                <!-- Package 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="package-item">
+                        <div class="package-img">
+                            <img src="img/dest-chamo-crocodiles.jpg" alt="Lake Chamo and Forty Springs Day Tour">
+                            <div class="package-price">$85 / person</div>
+                        </div>
+                        <div class="d-flex package-meta text-center">
+                            <small class="flex-fill py-2 border-end"><i class="fa-solid fa-location-dot text-primary me-1"></i>Lake Chamo</small>
+                            <small class="flex-fill py-2 border-end"><i class="fa-solid fa-calendar-days text-primary me-1"></i>1 Day</small>
+                            <small class="flex-fill py-2"><i class="fa-solid fa-user-group text-primary me-1"></i>2–8 Guests</small>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="mb-2 text-warning small">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-muted ms-1">(4.9)</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Lake Chamo &amp; Forty Springs Safari</h5>
+                            <p class="text-muted small flex-grow-1">Morning forest walk through the Forty Springs followed by a 3-hour private boat safari to the Crocodile Market.</p>
+                            <div class="d-flex justify-content-between pt-2">
+                                <a href="#booking" class="btn btn-primary btn-sm rounded-pill px-4">Book Now</a>
+                                <a href="#destinations" class="btn btn-outline-primary btn-sm rounded-pill px-3">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="package-item">
+                        <div class="package-img">
+                            <img src="img/dest-dorze-village.jpg" alt="Dorze Highland Cultural Tour">
+                            <div class="package-price">$95 / person</div>
+                        </div>
+                        <div class="d-flex package-meta text-center">
+                            <small class="flex-fill py-2 border-end"><i class="fa-solid fa-location-dot text-primary me-1"></i>Dorze Highlands</small>
+                            <small class="flex-fill py-2 border-end"><i class="fa-solid fa-calendar-days text-primary me-1"></i>1 Day</small>
+                            <small class="flex-fill py-2"><i class="fa-solid fa-user-group text-primary me-1"></i>2–6 Guests</small>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="mb-2 text-warning small">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-muted ms-1">(5.0)</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Dorze Village &amp; Weaving Immersion</h5>
+                            <p class="text-muted small flex-grow-1">Visit bamboo beehive homes in the Guge Mountains, watch master cotton weavers, and taste fresh kotcho bread &amp; honey wine.</p>
+                            <div class="d-flex justify-content-between pt-2">
+                                <a href="#booking" class="btn btn-primary btn-sm rounded-pill px-4">Book Now</a>
+                                <a href="#destinations" class="btn btn-outline-primary btn-sm rounded-pill px-3">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="package-item">
+                        <div class="package-img">
+                            <img src="img/dest-nechisar-savanna.jpg" alt="Complete Arba Minch 3-Day Explorer">
+                            <div class="package-price">$290 / person</div>
+                        </div>
+                        <div class="d-flex package-meta text-center">
+                            <small class="flex-fill py-2 border-end"><i class="fa-solid fa-location-dot text-primary me-1"></i>Nechisar &amp; Dorze</small>
+                            <small class="flex-fill py-2 border-end"><i class="fa-solid fa-calendar-days text-primary me-1"></i>3 Days</small>
+                            <small class="flex-fill py-2"><i class="fa-solid fa-user-group text-primary me-1"></i>2–10 Guests</small>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="mb-2 text-warning small">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-muted ms-1">(4.8)</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Complete Twin Lakes &amp; Nechisar Explorer</h5>
+                            <p class="text-muted small flex-grow-1">Full 3-day itinerary: Bridge of God lookout, Nechisar 4x4 zebra safari, Lake Chamo cruise, Forty Springs &amp; Dorze highlands.</p>
+                            <div class="d-flex justify-content-between pt-2">
+                                <a href="#booking" class="btn btn-primary btn-sm rounded-pill px-4">Book Now</a>
+                                <a href="#destinations" class="btn btn-outline-primary btn-sm rounded-pill px-3">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Tour Packages End -->
+
+    <!-- Booking Section Start -->
+    <section id="booking" class="booking-section py-5">
+        <div class="container py-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <h6 class="text-warning text-uppercase fw-bold mb-3" style="letter-spacing: 2px;">Online Reservation</h6>
+                    <h2 class="display-5 fw-bold text-white mb-4">Plan Your Arba Minch Getaway</h2>
+                    <p class="text-white-50 mb-4">
+                        Traveling solo, with family, or heading south toward the Omo Valley? Tell us your dates and preferred sights, and our local Arba Minch coordinators will craft a seamless itinerary.
+                    </p>
+                    <div class="d-flex flex-column gap-2 text-white">
+                        <div><i class="fa-solid fa-circle-check text-warning me-2"></i>Direct local pricing — no middleman fees</div>
+                        <div><i class="fa-solid fa-circle-check text-warning me-2"></i>Flexible pickup from Arba Minch Airport (AMH)</div>
+                        <div><i class="fa-solid fa-circle-check text-warning me-2"></i>English, Amharic &amp; Gamogna-speaking guides</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-white text-dark p-4 p-md-5 rounded-4 shadow-lg">
+                        <h4 class="fw-bold mb-4 text-primary">Request a Custom Quote</h4>
+                        <form id="arbaMinchBookingForm" class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold" for="guestName">Full Name</label>
+                                <input type="text" class="form-control" id="guestName" placeholder="Abebe Bikila" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold" for="guestEmail">Email Address</label>
+                                <input type="email" class="form-control" id="guestEmail" placeholder="you@example.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold" for="guestDate">Arrival Date</label>
+                                <input type="date" class="form-control" id="guestDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold" for="guestPackage">Select Experience</label>
+                                <select class="form-select" id="guestPackage">
+                                    <option>Lake Chamo &amp; Forty Springs Safari</option>
+                                    <option>Dorze Village &amp; Weaving Immersion</option>
+                                    <option>Complete Twin Lakes &amp; Nechisar Explorer</option>
+                                    <option>Custom Arba Minch + Omo Valley</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-semibold" for="guestNotes">Special Requests</label>
+                                <textarea class="form-control" id="guestNotes" rows="3" placeholder="Number of travelers, lodge preference, airport pickup..."></textarea>
+                            </div>
+                            <div class="col-12 d-grid">
+                                <button type="submit" class="btn btn-primary rounded-pill py-3 fw-bold">Send Booking Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Booking Section End -->
+
+    <!-- Local Guides Start -->
+    <section id="guides" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mx-auto mb-5" style="max-width: 650px;">
+                <h6 class="section-title mb-3">Travel Guides</h6>
+                <h2 class="display-6 fw-bold">Meet Our Local Arba Minch Experts</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="guide-card text-center p-4">
+                        <div class="guide-avatar">DT</div>
+                        <h5 class="fw-bold mb-1">Dawit Tadesse</h5>
+                        <p class="text-primary small fw-semibold mb-2">Nechisar Wildlife Ranger</p>
+                        <p class="text-muted small mb-0">12 years leading 4x4 safaris across the White Grass savanna and Bridge of God.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="guide-card text-center p-4">
+                        <div class="guide-avatar">SB</div>
+                        <h5 class="fw-bold mb-1">Selamawit Bekele</h5>
+                        <p class="text-primary small fw-semibold mb-2">Dorze Cultural Host</p>
+                        <p class="text-muted small mb-0">Born in Chencha; specializes in Dorze weaving heritage, bamboo architecture &amp; cuisine.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="guide-card text-center p-4">
+                        <div class="guide-avatar">YK</div>
+                        <h5 class="fw-bold mb-1">Yohannes Kassa</h5>
+                        <p class="text-primary small fw-semibold mb-2">Lake Chamo Captain</p>
+                        <p class="text-muted small mb-0">Expert navigator of Lake Chamo's Crocodile Market, hippo channels, and bird islands.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="guide-card text-center p-4">
+                        <div class="guide-avatar">BG</div>
+                        <h5 class="fw-bold mb-1">Bereket Gamo</h5>
+                        <p class="text-primary small fw-semibold mb-2">Forty Springs Naturalist</p>
+                        <p class="text-muted small mb-0">Ornithologist &amp; botanist guiding dawn walks through the Forty Springs fig forest.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Local Guides End -->
+
+    <!-- Testimonials Start -->
+    <section class="bg-light py-5">
+        <div class="container py-4">
+            <div class="text-center mx-auto mb-5" style="max-width: 650px;">
+                <h6 class="section-title mb-3">Testimonials</h6>
+                <h2 class="display-6 fw-bold">What Travelers Say</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-muted mb-4">"Seeing Lake Abaya's red water and Lake Chamo's blue water from the Bridge of God at sunrise was unforgettable. Our Lake Chamo boat captain got us safely close to massive crocodiles!"</p>
+                        <h6 class="fw-bold mb-0">Elena M.</h6>
+                        <small class="text-muted">Berlin, Germany</small>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-muted mb-4">"The Dorze village tour up in Chencha was the highlight of our southern Ethiopia trip. Learning how they build 10-meter bamboo huts and tasting fresh kotcho with honey was magical."</p>
+                        <h6 class="fw-bold mb-0">Daniel &amp; Sarah K.</h6>
+                        <small class="text-muted">Toronto, Canada</small>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="text-warning mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-muted mb-4">"Forty Springs feels like a hidden Eden right next to Arba Minch. Colobus monkeys in the fig trees, crystal-clear water, and the sweetest mangoes I've ever eaten."</p>
+                        <h6 class="fw-bold mb-0">Hanna T.</h6>
+                        <small class="text-muted">Addis Ababa, Ethiopia</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials End -->
+
+    <!-- Subscribe Start -->
+    <section class="subscribe-section py-5 text-white">
+        <div class="container py-4 text-center" style="max-width: 720px;">
+            <h6 class="text-warning text-uppercase fw-bold mb-2" style="letter-spacing: 2px;">Newsletter</h6>
+            <h2 class="display-6 fw-bold mb-3">Get Arba Minch Travel Tips</h2>
+            <p class="text-white-50 mb-4">Seasonal wildlife updates, Gamo cultural festival dates, and lodge offers straight to your inbox.</p>
+            <form id="newsletterForm" class="position-relative mx-auto" style="max-width: 520px;">
+                <input class="form-control rounded-pill py-3 ps-4 pe-5 border-0" type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-accent rounded-pill position-absolute top-50 end-0 translate-middle-y me-2 px-4 py-2">Subscribe</button>
+            </form>
+        </div>
+    </section>
+    <!-- Subscribe End -->
+
+    <!-- Footer Start -->
+    <footer id="contact" class="footer pt-5 pb-4">
+        <div class="container py-4">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="fw-bold"><i class="fa-solid fa-water me-2 text-warning"></i>Arba Minch Tours</h4>
+                    <p class="small">Your trusted local gateway to the Forty Springs, Nechisar National Park, Lake Chamo, Lake Abaya, and the Dorze Highlands in Southern Ethiopia.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h4 class="fw-bold">Explore</h4>
+                    <a class="footer-link" href="#about">About Arba Minch</a>
+                    <a class="footer-link" href="#services">Our Services</a>
+                    <a class="footer-link" href="#destinations">Destinations</a>
+                    <a class="footer-link" href="#packages">Tour Packages</a>
+                    <a class="footer-link" href="#guides">Local Guides</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="fw-bold">Top Sights</h4>
+                    <a class="footer-link" href="#destinations">Bridge of God</a>
+                    <a class="footer-link" href="#destinations">Forty Springs Forest</a>
+                    <a class="footer-link" href="#destinations">Lake Chamo Crocodiles</a>
+                    <a class="footer-link" href="#destinations">Nechisar Savanna</a>
+                    <a class="footer-link" href="#destinations">Dorze Bamboo Village</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="fw-bold">Contact</h4>
+                    <p class="small mb-2"><i class="fa-solid fa-location-dot text-warning me-2"></i>Sikela Main Road, Arba Minch, Ethiopia</p>
+                    <p class="small mb-2"><i class="fa-solid fa-phone text-warning me-2"></i>+251 46 881 0040</p>
+                    <p class="small mb-2"><i class="fa-solid fa-envelope text-warning me-2"></i>visit@arbaminch-tours.et</p>
+                    <p class="small mb-0"><i class="fa-solid fa-clock text-warning me-2"></i>Daily: 6:00 AM – 8:00 PM EAT</p>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-white-50">
+                <span>&copy; 2026 Arba Minch Tourism. Inspired by Travela &amp; A World.</span>
+                <span>Crafted for the Land of Forty Springs &amp; Twin Lakes.</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#home" class="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 1100;">
+        <div id="bookingToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div id="bookingToastBody" class="toast-body">Request received!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -8,11 +8,12 @@ export default function DestinationCard({ d }: { d: Destination }) {
   return (
     <Link to={`/destination/${d.id}`} className="block group">
       <Card className="overflow-hidden h-full group-hover:shadow-lg transition-shadow">
-        <div className="h-36 bg-forest flex items-center justify-center relative">
+        <div className="h-44 bg-forest flex items-center justify-center relative overflow-hidden">
           {d.image_url
-            ? <img src={d.image_url} alt={d.name} loading="lazy" className="w-full h-full object-cover" />
+            ? <img src={d.image_url} alt={d.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             : <Mountain size={40} className="text-ivory/40" />}
-          <div className="absolute top-2 left-2"><UnverifiedBadge verified={d.is_verified} /></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
+          <div className="absolute top-2.5 left-2.5"><UnverifiedBadge verified={d.is_verified} /></div>
         </div>
         <div className="p-4">
           <div className="flex items-start justify-between gap-2">

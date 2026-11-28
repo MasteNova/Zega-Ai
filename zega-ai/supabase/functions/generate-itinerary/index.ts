@@ -41,6 +41,19 @@ const toMin = (hhmm: string) => { const [h, m] = hhmm.split(':').map(Number); re
 const toHHMM = (m: number) =>
   `${String(Math.floor((m % 1440) / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
 
+let cachedModel: string | null = null;
+
+async function listGeminiModels(apiKey: string): Promise<string[]> {
+  const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {
+    headers: { 'x-goog-api-key': apiKey }
+  });
+  if (!res.ok) return [];
+  const data = await res.json();
+  return (data?.models ?? [])
+    .filter((m: any) => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes('generateContent'))
+    .map((m: any) => String(m.name).replace(/^models\//, ''));
+}
+
 async function callGemini(apiKey: string, model: string, system: string, user: string): Promise<string> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 25_000);
@@ -77,31 +90,32 @@ Deno.serve(async (req) => {
   const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
-  const { data: allowed } = await db.rpc('check_rate_limit', {
-    p_key: `ai:${ip}`, p_max: 10, p_window_seconds: 3600
-  });
+  const [{ data: allowed }, { data: dests, error: dErr }] = await Promise.all([
+    db.rpc('check_rate_limit', { p_key: `ai:${ip}`, p_max: 20, p_window_seconds: 3600 }),
+    db.from('destinations').select('*').ilike('city', `%${input.city}%`).eq('is_active', true)
+  ]);
   if (allowed === false) return json({ error: 'rate_limited' }, 429);
-
-  const { data: dests, error: dErr } = await db
-    .from('destinations').select('*').ilike('city', `%${input.city}%`).eq('is_active', true);
   if (dErr) return json({ error: 'db_error', detail: dErr.message }, 500);
   if (!dests?.length) return json({ error: 'no_destinations' }, 400);
 
   const catalog = dests.map((d) => ({
     id: d.id, name: d.name, category: d.category_id, interests: d.interests,
+    lat: d.lat, lng: d.lng, opening_hours: d.opening_hours,
     visit_minutes: d.visit_minutes, entry_fee_min: d.entry_fee_min, entry_fee_max: d.entry_fee_max,
-    description: (d.description ?? '').slice(0, 200)
+    description: (d.description ?? '').slice(0, 180)
   }));
 
+  const targetStops = input.hours <= 3 ? '2-3' : input.hours <= 6 ? '3-4' : '4-6';
   const system = [
-    'You are Zega-AI, a travel planner for Arba Minch, Ethiopia.',
-    'HARD RULES: You may ONLY use destinations from the provided catalog, referenced by their exact id.',
-    'Never invent places, prices or facts. Entry fees come from the catalog; you only estimate transport costs',
-    'conservatively in ETB (transport_cost_min/max). Respect total budget and total available time including',
-    'roughly 20 minutes travel between stops. Respond with ONLY valid JSON matching this shape:',
+    'You are Zega-AI, an expert Arba Minch, Ethiopia travel planner.',
+    'HARD RULES: Use ONLY destinations from the catalog by exact uuid. Never invent places or entry fees.',
+    `Plan ${targetStops} geographically logical stops (use lat/lng so stops flow smoothly from ${input.startLocation})`,
+    `that fit ${input.hours} hours (including ~15-20 min travel between stops) and stay within ${input.budgetEtb} ETB total.`,
+    `Match interests (${input.interests.join(', ') || 'any'}) and ${input.travelStyle} pace using ${input.transport}.`,
+    'Write concise, practical activity instructions (what to see/do) and realistic ETB transport_cost_min/max per leg.',
+    'Respond ONLY with JSON:',
     '{"title":string,"stops":[{"destination_id":uuid,"minutes":int,"activity":string,',
-    '"transport_cost_min":number,"transport_cost_max":number}],"tips":string[],"safety":string[],"alternatives":uuid[]}',
-    'alternatives must also be catalog ids. Tips/safety must be generic and cautious, never fabricated specifics.'
+    '"transport_cost_min":number,"transport_cost_max":number}],"tips":string[],"safety":string[],"alternatives":uuid[]}'
   ].join(' ');
 
   const user = JSON.stringify({ request: input, catalog });
@@ -111,12 +125,34 @@ Deno.serve(async (req) => {
 
   let plan: z.infer<typeof AiPlan>;
   try {
-    const raw = await callGemini(apiKey, Deno.env.get('GEMINI_MODEL') ?? 'gemini-2.5-flash', system, user);
+    let raw = '';
+    if (cachedModel) {
+      try {
+        raw = await callGemini(apiKey, cachedModel, system, user);
+      } catch (err) {
+        if (String(err).includes('404')) cachedModel = null;
+        else throw err;
+      }
+    }
+    if (!cachedModel) {
+      const preferred = Deno.env.get('GEMINI_MODEL') ?? 'gemini-2.5-flash-lite';
+      try {
+        raw = await callGemini(apiKey, preferred, system, user);
+        cachedModel = preferred;
+      } catch (err) {
+        if (!String(err).includes('404')) throw err;
+        const avail = await listGeminiModels(apiKey);
+        const pick = avail.find((m) => m.includes('flash-lite')) ?? avail.find((m) => m.includes('flash')) ?? avail[0];
+        if (!pick) throw new Error('gemini_no_models_available');
+        raw = await callGemini(apiKey, pick, system, user);
+        cachedModel = pick;
+      }
+    }
     const candidate = AiPlan.safeParse(JSON.parse(raw));
     if (!candidate.success) throw new Error('ai_schema_invalid');
     plan = candidate.data;
   } catch (e) {
-    return json({ error: 'ai_unavailable', reason: e instanceof Error ? e.message : String(e) }, 502); // frontend builds labeled fallback
+    return json({ error: 'ai_unavailable', reason: e instanceof Error ? e.message : String(e) }, 502);
   }
 
   // Server-side truth: costs & schedule from DB, never from the model.

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { listPhrases } from '../lib/api';
 import { readCache, writeCache } from '../lib/cache';
 import { friendlyError } from '../lib/supabase';
-import { PageTitle, Card, Badge, Skeleton, ErrorState, EmptyState, Input, Modal } from '../components/ui';
+import { PageBanner, Card, Badge, Skeleton, ErrorState, EmptyState, Input, Modal } from '../components/ui';
 import type { Phrase } from '../types';
 import { useI18n } from '../i18n';
 
@@ -36,8 +36,13 @@ export default function Phrasebook() {
   }, [data, q, cat, onlyFavs, favs]);
 
   return (
-    <div className="max-w-2xl">
-      <PageTitle title="Gamo · Amharic · English phrasebook" sub="Gamo text and native audio are added after speaker verification — nothing here is machine-invented." />
+    <div className="max-w-3xl mx-auto">
+      <PageBanner
+        eyebrow="Local Language"
+        title="Gamo · Amharic · English Phrasebook"
+        sub="Essential greetings, bajaj negotiation, market numbers, and emergency phrases with full-screen driver mode."
+        image="https://commons.wikimedia.org/wiki/Special:FilePath/Dorze_house.jpg?width=1400"
+      />
       <div className="relative mb-3">
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink/40" />
         <Input aria-label={t('search')} placeholder={`${t('search')}…`} value={q} onChange={(e) => setQ(e.target.value)} className="pl-9" />

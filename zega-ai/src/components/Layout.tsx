@@ -1,6 +1,9 @@
 import { useState, type ReactNode } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Home, Compass, Sparkles, Banknote, ShieldAlert, BookOpen, Bookmark, Info, Settings, LogIn, Menu, X, Mountain, WifiOff, LayoutDashboard } from 'lucide-react';
+import {
+  Home, Compass, Sparkles, Banknote, ShieldAlert, BookOpen, Bookmark,
+  Info, Settings, LogIn, Menu, X, Mountain, WifiOff, LayoutDashboard, MapPin, PhoneCall
+} from 'lucide-react';
 import clsx from 'clsx';
 import { useI18n, type Lang } from '../i18n';
 import { useOnline } from '../state/online';
@@ -38,47 +41,101 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="bg-gold-100 text-terra-700 text-xs px-4 py-1.5 text-center">{t('gamoNotice')}</div>
       )}
 
-      <header className="sticky top-0 z-[1000] bg-ivory/95 backdrop-blur border-b border-forest/10">
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center gap-3">
-          <button className="md:hidden p-1" aria-label="Menu" onClick={() => setDrawer(true)}><Menu size={22} /></button>
-          <Link to="/" className="flex items-center gap-2 font-display font-bold text-forest text-lg">
-            <Mountain size={22} className="text-terra" /> Zega-AI
-          </Link>
-          <nav className="hidden md:flex items-center gap-1 ml-6 text-sm">
-            {[...bottom.slice(1), ...more.slice(0, 2)].map((n) => (
-              <NavLink key={n.to} to={n.to} className={({ isActive }) =>
-                clsx('px-3 py-1.5 rounded-lg font-medium', isActive ? 'bg-forest text-ivory' : 'text-ink/70 hover:bg-forest-100')}>
-                {n.label}
-              </NavLink>
-            ))}
-          </nav>
-          <div className="ml-auto flex items-center gap-2">
-            <select aria-label={t('language')} value={lang} onChange={(e) => setLang(e.target.value as Lang)}
-              className="text-xs rounded-lg border border-forest/20 bg-white px-2 py-1.5">
-              <option value="en">EN</option><option value="am">አማ</option><option value="gamo">Gamo</option>
-            </select>
+      {/* Luxury Top Utility Bar (Desktop) */}
+      <div className="hidden md:block bg-forest-700 text-ivory/80 text-xs border-b border-ivory/10">
+        <div className="max-w-6xl mx-auto px-4 h-9 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <span className="inline-flex items-center gap-1.5"><MapPin size={12} className="text-gold" /> Arba Minch · Gamo Zone, Ethiopia</span>
+            <Link to="/safety" className="inline-flex items-center gap-1.5 hover:text-gold transition-colors">
+              <PhoneCall size={12} className="text-gold" /> Emergency: 991 / 907
+            </Link>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link to="/about" className="hover:text-gold transition-colors">{t('about')}</Link>
+            <Link to="/preferences" className="hover:text-gold transition-colors">{t('preferences')}</Link>
             {staff && (
-              <Link to="/admin" className="hidden md:inline-flex items-center gap-1 text-sm font-medium text-forest px-2 py-1.5 rounded-lg hover:bg-forest-100">
-                <LayoutDashboard size={16} /> {t('admin')}
-              </Link>
-            )}
-            {!session && (
-              <Link to="/login" className="inline-flex items-center gap-1 text-sm font-medium text-forest px-2 py-1.5 rounded-lg hover:bg-forest-100">
-                <LogIn size={16} /> <span className="hidden sm:inline">{t('login')}</span>
+              <Link to="/admin" className="text-gold font-medium hover:underline inline-flex items-center gap-1">
+                <LayoutDashboard size={12} /> {t('admin')}
               </Link>
             )}
           </div>
         </div>
+      </div>
+
+      {/* Main Glassmorphic Navbar */}
+      <header className="sticky top-0 z-[1000] bg-ivory/90 backdrop-blur-md border-b border-forest/10">
+        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center gap-3">
+          <button className="md:hidden p-1.5 rounded-lg hover:bg-forest-100" aria-label="Menu" onClick={() => setDrawer(true)}><Menu size={22} /></button>
+          <Link to="/" className="flex items-center gap-2.5 font-display font-bold text-forest text-xl tracking-tight">
+            <span className="w-9 h-9 rounded-xl bg-forest text-gold flex items-center justify-center shadow-sm">
+              <Mountain size={20} />
+            </span>
+            <span>Zega<span className="text-terra-700">-AI</span></span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-1 ml-6 text-sm">
+            {[...bottom.slice(1), ...more.slice(0, 2)].map((n) => (
+              <NavLink key={n.to} to={n.to} className={({ isActive }) =>
+                clsx('px-3.5 py-2 rounded-full font-medium transition-colors',
+                  isActive ? 'bg-forest text-ivory shadow-sm' : 'text-ink/75 hover:bg-forest-100 hover:text-forest')}>
+                {n.label}
+              </NavLink>
+            ))}
+          </nav>
+          <div className="ml-auto flex items-center gap-2.5">
+            <select aria-label={t('language')} value={lang} onChange={(e) => setLang(e.target.value as Lang)}
+              className="text-xs font-medium rounded-full border border-forest/20 bg-white px-3 py-1.5 focus:outline-none focus:border-forest">
+              <option value="en">EN</option><option value="am">አማ</option><option value="gamo">Gamo</option>
+            </select>
+            {!session && (
+              <Link to="/login" className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest px-3 py-2 rounded-full border border-forest/20 hover:bg-forest-100 transition-colors">
+                <LogIn size={14} /> <span className="hidden sm:inline">{t('login')}</span>
+              </Link>
+            )}
+            <Link to="/planner" className="hidden lg:inline-flex items-center gap-1.5 rounded-full bg-gold text-ink px-4 py-2 text-xs font-semibold hover:bg-gold/85 shadow-sm transition-colors">
+              <Sparkles size={14} /> {t('planner')}
+            </Link>
+          </div>
+        </div>
       </header>
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-6 pb-24 md:pb-10">{children}</main>
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-7 pb-24 md:pb-12">{children}</main>
 
-      <footer className="hidden md:block border-t border-forest/10 text-xs text-ink/50 py-4 text-center">
-        Zega-AI · Map data © OpenStreetMap contributors · Prices are local estimates, not guarantees.
+      {/* Luxury Multi-Column Footer (Desktop) */}
+      <footer className="hidden md:block bg-forest-700 text-ivory/80 border-t border-ivory/10 mt-10">
+        <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-4 gap-8 text-xs">
+          <div className="col-span-2 space-y-2.5">
+            <div className="flex items-center gap-2 font-display text-lg font-bold text-ivory">
+              <Mountain size={20} className="text-gold" /> Zega-AI · Arba Minch
+            </div>
+            <p className="text-ivory/70 leading-relaxed max-w-md">
+              An intelligent, honest travel companion for Arba Minch and the Gamo Zone — combining catalog-grounded AI itineraries,
+              fair transport estimates, Amharic &amp; Gamo phrases, and offline-ready safety.
+            </p>
+            <p className="text-ivory/45 pt-1">Map data © OpenStreetMap contributors · Prices are local estimates, not guarantees.</p>
+          </div>
+          <div className="space-y-2">
+            <p className="font-semibold text-gold uppercase tracking-wider text-[11px]">Explore</p>
+            <ul className="space-y-1.5">
+              <li><Link to="/explore" className="hover:text-ivory">Destinations</Link></li>
+              <li><Link to="/planner" className="hover:text-ivory">AI Trip Planner</Link></li>
+              <li><Link to="/fares" className="hover:text-ivory">Fair-Price Checker</Link></li>
+              <li><Link to="/phrases" className="hover:text-ivory">Gamo &amp; Amharic Phrasebook</Link></li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <p className="font-semibold text-gold uppercase tracking-wider text-[11px]">Support &amp; Safety</p>
+            <ul className="space-y-1.5">
+              <li><Link to="/safety" className="hover:text-ivory">Emergency &amp; SOS</Link></li>
+              <li><Link to="/saved" className="hover:text-ivory">Saved Trips</Link></li>
+              <li><Link to="/preferences" className="hover:text-ivory">Language &amp; Offline Cache</Link></li>
+              <li><Link to="/about" className="hover:text-ivory">Honesty &amp; Data Policy</Link></li>
+            </ul>
+          </div>
+        </div>
       </footer>
 
       {/* mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-[1000] bg-white border-t border-forest/10 grid grid-cols-5 pb-[env(safe-area-inset-bottom)]">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 z-[1000] bg-white/95 backdrop-blur border-t border-forest/10 grid grid-cols-5 pb-[env(safe-area-inset-bottom)]">
         {bottom.map((n) => (
           <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) =>
             clsx('flex flex-col items-center gap-0.5 py-2 text-[10px] font-medium',

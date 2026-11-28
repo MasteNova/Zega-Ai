@@ -5,13 +5,19 @@ import clsx from 'clsx';
 import { generateItinerary, setLastItinerary } from '../lib/api';
 import { itineraryInputSchema } from '../lib/schemas';
 import { friendlyError } from '../lib/supabase';
-import { Button, Input, Select, PageTitle, Card } from '../components/ui';
+import { Button, Input, Select, PageBanner, Card } from '../components/ui';
 import { useI18n } from '../i18n';
 import { useOnline } from '../state/online';
 import { useToast } from '../state/toast';
 import type { ItineraryInput } from '../types';
 
 const INTERESTS = ['nature', 'wildlife', 'culture', 'water', 'market', 'shopping', 'food', 'viewpoint'];
+
+const PRESETS: { label: string; patch: Partial<ItineraryInput> }[] = [
+  { label: 'Wildlife & Springs (4h · 1,500 ETB)', patch: { hours: 4, budgetEtb: 1500, interests: ['nature', 'wildlife'], transport: 'bajaj', travelStyle: 'balanced' } },
+  { label: 'Lake Chamo & Sunset (5h · 3,500 ETB)', patch: { hours: 5, budgetEtb: 3500, interests: ['water', 'wildlife', 'viewpoint'], transport: 'bajaj', travelStyle: 'relaxed' } },
+  { label: 'Dorze Culture & Market (6h · 2,500 ETB)', patch: { hours: 6, budgetEtb: 2500, interests: ['culture', 'market', 'shopping'], transport: 'taxi', travelStyle: 'balanced' } }
+];
 
 export default function Planner() {
   const { t } = useI18n();
@@ -40,14 +46,30 @@ export default function Planner() {
   };
 
   return (
-    <div className="max-w-2xl">
-      <PageTitle title={t('planner')} sub="Tell Zega your budget and time — it plans only from the destination catalog." />
+    <div className="max-w-3xl mx-auto">
+      <PageBanner
+        eyebrow="Gemini AI Trip Builder"
+        title={t('planner')}
+        sub="Tell Zega your ETB budget and available hours — it plans strictly from our real Arba Minch catalog."
+        image="https://commons.wikimedia.org/wiki/Special:FilePath/Nechisar_National_Park.JPG?width=1400"
+      />
       {!online && (
         <Card className="p-3 mb-4 text-sm text-terra-700 flex items-center gap-2 bg-gold-100 border-gold">
           <WifiOff size={16} /> {t('aiNeedsNet')}
         </Card>
       )}
-      <Card className="p-5 space-y-4">
+      <Card className="p-5 md:p-6 space-y-5">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-terra-700 mb-2">Quick presets</p>
+          <div className="flex flex-wrap gap-2">
+            {PRESETS.map((p) => (
+              <button key={p.label} type="button" onClick={() => setForm((f) => ({ ...f, ...p.patch }))}
+                className="rounded-full border border-forest/20 bg-ivory px-3 py-1.5 text-xs font-medium text-forest hover:bg-forest-100">
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="grid sm:grid-cols-2 gap-4">
           <Input label="Destination city" value={form.city} onChange={(e) => set('city', e.target.value)} />
           <Input label={t('budget')} type="number" min={1} value={form.budgetEtb} onChange={(e) => set('budgetEtb', Number(e.target.value))} />

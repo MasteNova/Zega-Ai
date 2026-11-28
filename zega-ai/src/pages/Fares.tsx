@@ -4,7 +4,7 @@ import { Banknote, CheckCircle2, TrendingDown, TrendingUp, HelpCircle } from 'lu
 import { listRoutes, submitFareFeedback } from '../lib/api';
 import { compareQuote, type FareVerdict } from '../lib/fare';
 import { friendlyError } from '../lib/supabase';
-import { Button, Card, Input, Select, Textarea, PageTitle, Skeleton, ErrorState, Badge, UnverifiedBadge } from '../components/ui';
+import { Button, Card, Input, Select, Textarea, PageBanner, Skeleton, ErrorState, Badge, UnverifiedBadge } from '../components/ui';
 import { range } from '../lib/format';
 import { useI18n } from '../i18n';
 import { useToast } from '../state/toast';
@@ -43,8 +43,13 @@ export default function Fares() {
   };
 
   return (
-    <div className="max-w-2xl">
-      <PageTitle title="Bajaj fair-price assistant" sub="Local estimates only — not official or guaranteed prices." />
+    <div className="max-w-3xl mx-auto">
+      <PageBanner
+        eyebrow="Transport Transparency"
+        title="Bajaj & Boat Fair-Price Checker"
+        sub="Compare quoted ETB fares for Sikela, Shecha, Lake Chamo, and Dorze against local baseline estimates."
+        image="https://commons.wikimedia.org/wiki/Special:FilePath/Monument_in_Arba_Minch.jpg?width=1400"
+      />
       {isLoading && <Skeleton className="h-72" />}
       {error && <ErrorState message={friendlyError(error)} onRetry={() => refetch()} />}
       {routes && (

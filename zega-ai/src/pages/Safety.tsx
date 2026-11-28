@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ShieldAlert, MapPin, WifiOff, Loader2 } from 'lucide-react';
 import { createSos } from '../lib/api';
 import { friendlyError } from '../lib/supabase';
-import { Button, Card, Modal, Textarea, PageTitle, Badge } from '../components/ui';
+import { Button, Card, Modal, Textarea, PageBanner, Badge } from '../components/ui';
 import { useOnline } from '../state/online';
 import { useI18n } from '../i18n';
 
@@ -36,8 +36,13 @@ export default function Safety() {
   };
 
   return (
-    <div className="max-w-2xl space-y-5">
-      <PageTitle title={t('safety')} sub="Zega SOS alerts go to trained Zega responders — NOT to police or ambulance services." />
+    <div className="max-w-3xl mx-auto space-y-5">
+      <PageBanner
+        eyebrow="Traveler Protection"
+        title={t('safety')}
+        sub="One-tap national & local Arba Minch emergency lines plus live GPS SOS alerts to Zega responders."
+        image="https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Chamo_01.jpg?width=1400"
+      />
       <Card className="p-5 border-terra/30">
         <div className="flex items-start gap-3">
           <ShieldAlert size={28} className="text-terra-700 shrink-0" />

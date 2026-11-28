@@ -108,10 +108,30 @@ export function Modal({ title, onClose, children }: { title: string; onClose: ()
 
 export function PageTitle({ title, sub }: { title: string; sub?: string }) {
   return (
-    <header className="mb-5">
-      <h1 className="font-display text-2xl md:text-3xl font-semibold text-forest">{title}</h1>
-      {sub && <p className="text-sm text-ink/60 mt-1">{sub}</p>}
+    <header className="mb-6">
+      <h1 className="font-display text-2xl md:text-4xl font-semibold text-forest tracking-tight">{title}</h1>
+      {sub && <p className="text-sm text-ink/60 mt-1.5 max-w-2xl">{sub}</p>}
     </header>
+  );
+}
+
+const DEFAULT_BANNER = 'https://commons.wikimedia.org/wiki/Special:FilePath/Nechisar_National_Park_01.jpg?width=1400';
+
+export function PageBanner({
+  eyebrow, title, sub, image = DEFAULT_BANNER
+}: {
+  eyebrow: string; title: string; sub?: string; image?: string;
+}) {
+  return (
+    <section className="relative rounded-2xl overflow-hidden bg-forest text-ivory mb-8 shadow-card">
+      <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-forest-700/95 via-forest/80 to-forest-700/60" />
+      <div className="relative z-10 px-6 py-9 md:px-10 md:py-12 max-w-3xl">
+        <p className="uppercase tracking-[0.22em] text-[11px] font-semibold text-gold">{eyebrow}</p>
+        <h1 className="font-display text-3xl md:text-4xl font-bold mt-2 tracking-tight">{title}</h1>
+        {sub && <p className="text-sm md:text-base text-ivory/85 mt-2.5 leading-relaxed">{sub}</p>}
+      </div>
+    </section>
   );
 }
 

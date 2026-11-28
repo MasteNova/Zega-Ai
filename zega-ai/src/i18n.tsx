@@ -40,6 +40,15 @@ const am: Partial<Dict> = {
   viewList: 'ዝርዝር', viewMap: 'ካርታ', locateMe: 'አካሄዴን አሳይ', feedback: 'የዋጋ አስተያየት ላክ'
 };
 
+const gamo: Partial<Dict> = {
+  home: 'Keettaa', explore: 'Pilgga', map: 'Kaarttaa', planner: 'Halchchuwaa', fares: 'Gatiyaa',
+  phrases: 'Haasayaa', safety: 'Naguwaa', saved: 'Minjja', preferences: 'Dooruwaa', about: 'Waanabaa',
+  search: 'Koya', save: 'Minjja', cancel: 'Agga', confirm: 'Mintta', retry: 'Zaara mala',
+  loading: "Fe'ees…", sendSOS: 'SOS Kiitta', generate: 'Ogiyaa Halchchuwaa Medhdha',
+  budget: 'Baajjetiyaa (ETB)', check: 'Gatiyaa Xeella',
+  gamoNotice: 'Gamo UI & phrasebook use draft Standard Gamotstso — pending native-speaker review.'
+};
+
 interface I18n { lang: Lang; setLang: (l: Lang) => void; t: (k: keyof Dict) => string; }
 const I18nCtx = createContext<I18n>({ lang: 'en', setLang: () => {}, t: (k) => en[k] });
 export const useI18n = () => useContext(I18nCtx);
@@ -47,6 +56,7 @@ export const useI18n = () => useContext(I18nCtx);
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => readCache<Lang>('lang') ?? 'en');
   const setLang = (l: Lang) => { setLangState(l); writeCache('lang', l); };
-  const t = (k: keyof Dict): string => (lang === 'am' ? am[k] : undefined) ?? en[k];
+  const t = (k: keyof Dict): string =>
+    (lang === 'am' ? am[k] : lang === 'gamo' ? gamo[k] : undefined) ?? en[k];
   return <I18nCtx.Provider value={{ lang, setLang, t }}>{children}</I18nCtx.Provider>;
 }
