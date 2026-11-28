@@ -21,8 +21,14 @@ export function buildFallbackItinerary(dests: Destination[], input: ItineraryInp
     const entryMin = Number(d.entry_fee_min ?? 0);
     const entryMax = Number(d.entry_fee_max ?? d.entry_fee_min ?? 0);
     const minutes = Math.min(d.visit_minutes, input.travelStyle === 'packed' ? d.visit_minutes : Math.ceil(d.visit_minutes * 0.8));
+    const isDining = d.category_id === 'food' || d.interests.includes('food');
+    const wantFoodMin = (isDining ? 350 : 100) * input.groupSize;
+    const wantFoodMax = (isDining ? 800 : 250) * input.groupSize;
     if (elapsed + travel + minutes > maxMinutes) continue;
     if (spentMax + entryMax > input.budgetEtb) continue;
+    const canFood = spentMax + entryMax + wantFoodMax <= input.budgetEtb;
+    const foodMin = canFood ? wantFoodMin : 0;
+    const foodMax = canFood ? wantFoodMax : 0;
     cursor += travel;
     const arrive = toHHMM(cursor);
     cursor += minutes;
@@ -32,11 +38,11 @@ export function buildFallbackItinerary(dests: Destination[], input: ItineraryInp
       activity: d.description?.slice(0, 140) ?? `Visit ${d.name}.`,
       description: d.description ?? undefined,
       entryMin, entryMax, transportMin: 0, transportMax: 0,
-      foodMin: 0, foodMax: 0, otherMin: 0, otherMax: 0,
+      foodMin, foodMax, otherMin: 0, otherMax: 0,
       isVerified: d.is_verified
     });
     elapsed += travel + minutes;
-    spentMax += entryMax;
+    spentMax += entryMax + foodMax;
     if (stops.length >= 5) break;
   }
 

@@ -116,8 +116,10 @@ Deno.serve(async (req) => {
     `Plan ${targetStops} geographically logical stops (use lat/lng so stops flow smoothly from ${input.startLocation})`,
     `that fit ${input.hours} hours (including ~15-20 min travel between stops) and stay within ${input.budgetEtb} ETB total.`,
     `Match interests (${input.interests.join(', ') || 'any'}) and ${input.travelStyle} pace using ${input.transport}.`,
-    'Write concise, practical activity instructions (what to see/do) and realistic ETB estimates per stop for:',
-    'transport_cost_min/max (bajaj/taxi/boat), food_cost_min/max (snacks/meals/water/coffee), and other_cost_min/max (local guide/scout/tips).',
+    'Write concise, practical activity instructions (what to see/do) and realistic 2026 Arba Minch ETB estimates per stop for:',
+    '- transport_cost_min/max (bajaj 50-450 ETB, taxi 400-4500 ETB, boat 1500-2500 ETB),',
+    `- food_cost_min/max (for ${input.groupSize} person(s): water/coffee/snacks 100-250 ETB/person; local fish/meal 400-900 ETB/person; resort dining 700-1500 ETB/person),`,
+    '- other_cost_min/max (local guide/scout/tips 200-600 ETB where needed).',
     'Respond ONLY with JSON:',
     '{"title":string,"stops":[{"destination_id":uuid,"minutes":int,"activity":string,',
     '"transport_cost_min":number,"transport_cost_max":number,"food_cost_min":number,"food_cost_max":number,"other_cost_min":number,"other_cost_max":number}],"tips":string[],"safety":string[],"alternatives":uuid[]}'
@@ -164,6 +166,11 @@ Deno.serve(async (req) => {
   const byId = new Map(dests.map((d) => [d.id, d]));
   let stops = plan.stops.filter((s) => byId.has(s.destination_id)).map((s) => {
     const d = byId.get(s.destination_id)!;
+    const isDining = d.category_id === 'food' || (Array.isArray(d.interests) && d.interests.includes('food'));
+    const minFoodFloor = (isDining ? 400 : 100) * input.groupSize;
+    const maxFoodFloor = (isDining ? 850 : 250) * input.groupSize;
+    const rawFoodMin = Math.min(s.food_cost_min, s.food_cost_max);
+    const rawFoodMax = Math.max(s.food_cost_min, s.food_cost_max);
     return {
       destinationId: d.id as string, name: d.name as string, lat: d.lat as number, lng: d.lng as number,
       minutes: Math.min(s.minutes, d.visit_minutes as number), activity: s.activity,
@@ -171,8 +178,8 @@ Deno.serve(async (req) => {
       entryMin: Number(d.entry_fee_min ?? 0), entryMax: Number(d.entry_fee_max ?? d.entry_fee_min ?? 0),
       transportMin: Math.min(s.transport_cost_min, s.transport_cost_max),
       transportMax: Math.max(s.transport_cost_min, s.transport_cost_max),
-      foodMin: Math.min(s.food_cost_min, s.food_cost_max),
-      foodMax: Math.max(s.food_cost_min, s.food_cost_max),
+      foodMin: Math.max(rawFoodMin, minFoodFloor),
+      foodMax: Math.max(rawFoodMax, maxFoodFloor),
       otherMin: Math.min(s.other_cost_min, s.other_cost_max),
       otherMax: Math.max(s.other_cost_min, s.other_cost_max),
       isVerified: Boolean(d.is_verified),
